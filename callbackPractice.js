@@ -25,13 +25,17 @@ and what you should write is the sayHi function that makes the code above work,
 
 
   //Code Here for first
-  
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
+var firstName = names[0];
 first(names, function(firstName){
   console.log('The first name in names is ' + firstName)
 });
 
+
+function first(arr, firstFunc) {
+  firstFunc(arr[0]);
+}
 
 
 /* NEXT PROBLEM ---- NEXT PROBLEM ---- NEXT PROBLEM ---- NEXT PROBLEM */
@@ -47,7 +51,9 @@ last(names, function(lastName){
 });
 
 
-
+function last(arr, lastFunc) {
+  lastFunc(arr[arr.length - 1]);
+}
 
 
 /* NEXT PROBLEM ---- NEXT PROBLEM ---- NEXT PROBLEM ---- NEXT PROBLEM */
@@ -64,7 +70,9 @@ multiply(4, 3, function(answer){
 })
 
 
-
+function multiply(num1, num2, answerFunc) {
+  answerFunc(num1 * num2);
+}
 
 
 /* NEXT PROBLEM ---- NEXT PROBLEM ---- NEXT PROBLEM ---- NEXT PROBLEM */
@@ -85,7 +93,9 @@ contains(names, 'Colt', function(result){
 });
 
 
-
+function contains(arr, string1, resultFunc) {
+  resultFunc(arr.indexOf(string1) != - 1);
+}
 
 
 /* NEXT PROBLEM ---- NEXT PROBLEM ---- NEXT PROBLEM ---- NEXT PROBLEM */
@@ -97,10 +107,21 @@ contains(names, 'Colt', function(result){
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 uniq(names, function(uniqArr){
-  console.log('The new names array with all the duplicate items removed is ', uniqArr);
+  console.log('The new names array with all the duplicate items removed is ' + uniqArr);
 });
 
 
+function uniq(arr, uniqFunc) {
+  var uniqArray = [];
+  
+  arr.forEach(function(el) {
+    if (uniqArray.indexOf(el) === -1) {
+      uniqArray.push(el);
+    }
+  });
+ // console.log(uniqArray);
+  uniqFunc(uniqArray);
+}
 
 
 
@@ -113,10 +134,15 @@ uniq(names, function(uniqArr){
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 each(names, function(item, indice){
-  console.log('The item in the ' + indice + ' position is ' + item)
+  console.log('The item in the ' + indice + ' position is ' + item);
 });
 
 
+function each(arr, eachFunc) {
+  for (var i = 0; i< arr.length; i++) {
+    eachFunc(arr[i], i);
+  }
+}
 
 
 
@@ -152,3 +178,15 @@ var users = [
 getUserById(users, '16t', function(user){
   console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address); 
 });
+
+
+
+function getUserById(objArr, idNum, getUserFunc) {
+  var index = 0;
+  for (var i = 0; i < objArr.length; i++)   {
+    if (objArr[i].id === idNum) {
+      index = i;
+    }
+  }
+  getUserFunc(objArr[index]);
+}
